@@ -10,14 +10,14 @@ import { getAnimeResponse } from "@/libs/api-libs";
 
 const Popular = () => {
   const [page, setPage] = useState(1);
-  const [topAnime, setTopAnime] = useState({ data: [], pagination: {} });
+  const [topManga, setTopManga] = useState({ data: [], pagination: {} });
 
   const fetchData = async () => {
     // const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/top/anime?page=${page}`);
     // const data = await response.json();
-    const data = await getAnimeResponse("top/anime", `page=${page}`);
+    const data = await getAnimeResponse("top/manga", `page=${page}`);
 
-    setTopAnime(data);
+    setTopManga(data);
   };
 
   useEffect(() => {
@@ -27,11 +27,11 @@ const Popular = () => {
   return (
     <>
       <div className="p-8">
-        <Header title={`Popular Anime #${page}`} />
+        <Header title={`Popular Manga #${page}`} />
       </div>
-      {/* <HeaderMenu title={`Popular Anime #${page}`} /> */}
-      <AnimeList api={topAnime} />
-      <Pagination page={page} lastPage={topAnime.pagination?.last_visible_page} setPage={setPage} />
+      {/* <HeaderMenu title={`Popular Manga #${page}`} /> */}
+      <AnimeList api={topManga} />
+      <Pagination page={page} lastPage={topManga.pagination?.last_visible_page} setPage={setPage} />
       <ScrollToTopButton />
     </>
   );

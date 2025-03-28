@@ -8,16 +8,42 @@ export const getAnimeResponse = async (resource, query) => {
 
 export const getNestedAnimeResponse = async (resource, objectProperty) => {
   const response = await getAnimeResponse(resource);
-  return response.data.flatMap((item) => item[objectProperty]);
+
+  console.log(`Response for ${resource}:`, response);
+
+  if (!response?.data || response.data.length === 0) {
+    console.error(`Data not found for resource: ${resource}`);
+    return []; // Jika tidak ada data, kembalikan array kosong
+  }
+
+  console.log(`Extracting ${objectProperty} from response.data...`);
+  return response.data.flatMap((item) => item[objectProperty] ?? []);
 };
 
 export const reproduce = (data, gap) => {
-  const first = ~~(Math.random() * (data.length - gap) + 1);
+  if (!Array.isArray(data) || data.length === 0) {
+    console.error("Reproduce received invalid or empty data");
+    return { data: [] };
+  }
+
+  // Jika jumlah data lebih kecil dari gap, gunakan seluruh data
+  if (data.length <= gap) {
+    return { data };
+  }
+
+  const first = Math.floor(Math.random() * (data.length - gap));
   const last = first + gap;
 
-  const response = {
-    data: data.slice(first, last),
-  };
-
-  return response;
+  return { data: data.slice(first, last) };
 };
+
+// export const reproduce = (data, gap) => {
+//   const first = ~~(Math.random() * (data.length - gap) + 1);
+//   const last = first + gap;
+
+//   const response = {
+//     data: data.slice(first, last),
+//   };
+
+//   return response;
+// };

@@ -16,10 +16,15 @@ const inputSearch = () => {
   };
 
   return (
-    <form className="relative" onSubmit={handleSearch}>
-      <input type="text" placeholder="Search" className="w-full p-2 rounded" ref={searchRef} />
-      <button type="submit" className="absolute top-2 end-2">
-        <MagnifyingGlass size={24} />
+    <form className="relative text-black" onSubmit={handleSearch}>
+      <input
+        type="text"
+        placeholder="Search..."
+        className="w-full p-2 rounded bg-white placeholder-gray-500 border border-gray-300 transition-all duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-violet-500 focus:shadow-lg focus:shadow-white/50"
+        ref={searchRef}
+      />
+      <button type="submit" className="absolute top-2 end-2 p-1 rounded-full hover:bg-gray-200 transition">
+        <MagnifyingGlass size={20} className="text-gray-600" />
       </button>
     </form>
   );
