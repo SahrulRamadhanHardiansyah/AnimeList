@@ -13,7 +13,7 @@ export const getNestedAnimeResponse = async (resource, objectProperty) => {
 
   if (!response?.data || response.data.length === 0) {
     console.error(`Data not found for resource: ${resource}`);
-    return []; // Jika tidak ada data, kembalikan array kosong
+    return [];
   }
 
   console.log(`Extracting ${objectProperty} from response.data...`);
